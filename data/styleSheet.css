@@ -1,0 +1,78 @@
+.article {
+    border: 1px solid black;
+    margin-left: 200px;
+    padding: 50px;
+    display: inline-block;
+    background-color: white;
+    font-family: Calibri;
+}
+
+.rank {
+    border: 1px solid black;
+    margin-left: 150px;
+    padding: 70px;
+    background-color: white;
+    font-family: Calibri;
+}
+
+.finalRank {
+    border: 1px solid black;
+    margin-left: 150px;
+    padding: 70px;
+    background-color: white;
+    font-family: Calibri;
+}
+
+.bar {
+    width: 300%;
+    height: 60px;
+    background-color: black;
+    color: white;
+    text-indent: 775px;
+    font-size: 40px;
+    font-family: Calibri;
+    padding-top: 10px;
+    position: fixed;
+}
+
+.buttons {
+    up: 40px;
+    float: bottom;
+    width: 150px;
+    margin: 10px;
+    height: 10px;
+    background-color: black;
+    position: absolute;
+}
+
+.buttons button {
+    background-color: black;
+    width: 100%;
+    font-size: large;
+    padding: 20px 10px;
+    color: white;
+    border: none;
+}
+
+.buttons button:hover {
+    background-color: white;
+    color: black;
+}
+
+.buttons button:focus {
+    background-color: white;
+    color: black;
+}
+
+img {
+    width: 30%;
+    height: 30%;
+    padding: 15px;
+}
+
+html,
+body {
+    background-color: lightgrey;
+    padding: 25;
+    margin: 0;
+}
