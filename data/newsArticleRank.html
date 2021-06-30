@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title> News Article Rank</title>
+    <link href="styleSheet.css" rel="stylesheet">
+    <meta charset="UTF-8">
+</head>
+
+<body onload="articlePick('article1')">
+    <div class="bar"> <b> Article Rank</b> </div>
+    <div class="buttons">
+        <button onclick="ranking()">Ranking</button>
+        <button onclick="articlePick('article1')">Article 1</button>
+        <button onclick="articlePick('article2')">Article 2</button>
+        <button onclick="articlePick('article3')">Article 3</button>
+        <button onclick="articlePick('article4')">Article 4</button>
+        <button onclick="articlePick('article5')">Article 5</button>
+        <button onclick="increaseFontSize()">Increase Font Size</button>
+    </div>
+    <form method="get" id="articlePosition" style="display:none" class="articlePosition">
+        <h1 id="articleTitle"></h1>
+        <div id="articleBody" style="padding:10px"></div>
+    </form>
+
+    <form method="post" id="rank" style="display:none" class="rank">
+        <h1> Rank the following articles:</h1>
+        <h2> Article 1, Article 2, Article 3, Article 4, Article 5 </h2>
+        <label for="firstArticle">Best ranked article:</label>
+        <select id="firstArticle" style="margin-left: 30px">
+      <option value="Article 1"> Article 1</option>
+      <option value="Article 2"> Article 2</option>
+      <option value="Article 3"> Article 3</option>
+      <option value="Article 4"> Article 4</option>
+      <option value="Article 5"> Article 5</option>
+    </select>
+        <br><br>
+        <select id="secondArticle" style="margin-left: 158px">
+      <option value="Article 1"> Article 1</option>
+      <option value="Article 2"> Article 2</option>
+      <option value="Article 3"> Article 3</option>
+      <option value="Article 4"> Article 4</option>
+      <option value="Article 5"> Article 5</option>
+    </select>
+        <br><br>
+        <select id="thirdArticle" style="margin-left: 158px">
+      <option value="Article 1"> Article 1</option>
+      <option value="Article 2"> Article 2</option>
+      <option value="Article 3"> Article 3</option>
+      <option value="Article 4"> Article 4</option>
+      <option value="Article 5"> Article 5</option>
+    </select>
+        <br><br>
+        <select id="fourthArticle" style="margin-left: 158px">
+      <option value="Article 1"> Article 1</option>
+      <option value="Article 2"> Article 2</option>
+      <option value="Article 3"> Article 3</option>
+      <option value="Article 4"> Article 4</option>
+      <option value="Article 5"> Article 5</option>
+    </select>
+        <br><br>
+        <label for="fifthArticle"> Worst ranked article:</label>
+        <select id="fifthArticle" style="margin-left: 18px">
+      <option value="Article 1"> Article 1</option>
+      <option value="Article 2"> Article 2</option>
+      <option value="Article 3"> Article 3</option>
+      <option value="Article 4"> Article 4</option>
+      <option value="Article 5"> Article 5</option>
+    </select>
+        <br><br>
+        <input type="button" value="Submit your ranking" onclick="submitRanking()">
+    </form>
+
+    <form method="get" id="submittingRank" style="display:none" class="finalRank">
+        <h2> You have ranked the articles in this order:</h2>
+        <div id="ranked"></div>
+    </form>
+
+    <script type="application/javascript">
+        // Function for displaying the ranking screen
+        function ranking() {
+            var rank = document.getElementById("rank");
+            rank.style.display = "block";
+            var article = document.getElementById("articlePosition");
+            article.style.display = "none";
+        }
+
+        // Function for displaying the submitted ranked article order
+        function submitRanking() {
+            var x = document.getElementById("submittingRank");
+            x.style.display = "block";
+            var order = '';
+            order += '<ul>';
+            order += '<li>' + document.getElementById('firstArticle').value + '</li>';
+            order += '<li>' + document.getElementById('secondArticle').value + '</li>';
+            order += '<li>' + document.getElementById('thirdArticle').value + '</li>';
+            order += '<li>' + document.getElementById('fourthArticle').value + '</li>';
+            order += '<li>' + document.getElementById('fifthArticle').value + '</li>';
+            order += '</ul>';
+            document.getElementById('ranked').innerHTML = order;
+        }
+
+        // Function for displaying the articles based on what button is pressed
+        function articlePick(select) {
+            var article = document.getElementById("articlePosition");
+            article.style.display = "block";
+            var w = document.getElementById("rank");
+            w.style.display = "none";
+            if (select == 'article1') {
+                // Article 1 opens
+                window.choice = new Request('article-1.json');
+            }
+            if (select == 'article2') {
+                // Article 2 opens
+                window.choice = new Request('article-2.json');
+            }
+            if (select == 'article3') {
+                // Article 3 opens
+                window.choice = new Request('article-3.json');
+            }
+            if (select == 'article4') {
+                // Article 4 opens
+                window.choice = new Request('article-4.json');
+            }
+            if (select == 'article5') {
+                // Article 5 opens
+                window.choice = new Request('article-5.json');
+            }
+            // Fetches the contents that are in the .json file
+            fetch(window.choice)
+                .then(function(response) {
+                    return response.json();
+                })
+                // The formatting of the articles
+                .then(function(articleData) {
+                    var articleBody1 = '';
+                    var articleTitle1 = articleData.title;
+                    for (var x = 0; x < articleData.body.length; x++) {
+                        // Gets the heading information
+                        if (articleData.body[i].type == 'heading') {
+                            if (typeof articleData.body[i].model.text !== 'undefined') {
+                                // The text is added into one string
+                                articleBody1 += '<h2>' + articleData.body[i].model.text + '</h2>';
+                            }
+                        }
+                        // Gets the paragraph information
+                        if (articleData.body[i].type == 'paragraph') {
+                            if (typeof articleData.body[i].model.text !== 'undefined') {
+                                // The text is added into one string
+                                articleBody1 += '<p>' + articleData.body[i].model.text + '</p>';
+                            }
+                        }
+                        // Gets the image information
+                        if (articleData.body[i].type == 'image') {
+                            var img = articleData.body[i].model.url;
+                            var height = (articleData.body[i].model.height) / 2;
+                            var width = (articleData.body[i].model.width) / 2;
+                            var alt = articleData.body[i].model.altText;
+                            articleBody1 += '<img src="' + img + '" width="' + width + '" height="' + height + '" alt="' + alt + '"/>'; // Adds image to display
+                        }
+                        // Gets the list information
+                        if (articleData.body[i].type == 'list') {
+                            if (typeof articleData.body[i].model.items !== 'undefined') {
+                                articleBody1 += '<ul>';
+                                for (var x = 0; x < articleData.body[i].model.items.length; x++) {
+                                    var item = '';
+                                    item = articleData.body[i].model.items[x];
+                                    articleBody1 += '<li>' + item + '</li>';
+                                }
+                                articleBody1 += '</ul>'
+                            }
+                        }
+                    }
+                    document.getElementById('articleTitle').innerHTML = articleTitle1;
+                    document.getElementById('articleBody').innerHTML = articleBody1;
+                })
+                // In case of an error if an article can't be loaded
+                .catch(function(errorMessage) {
+                    console.log('error: ' + errorMessage);
+                });
+        }
+
+        // Increases the font sizes by pixels for accessibility
+        function increaseFontSize() {
+            document.getElementById("articlePosition").style.fontSize = "25px";
+            document.getElementById("rank").style.fontSize = "25px";
+            document.getElementById("submittingRank").style.fontSize = "25px";
+            document.getElementById("firstArticle").style.fontSize = "25px";
+            document.getElementById("secondArticle").style.fontSize = "25px";
+            document.getElementById("secondArticle").style.marginLeft = "231px";
+            document.getElementById("thirdArticle").style.fontSize = "25px";
+            document.getElementById("thirdArticle").style.marginLeft = "231px";
+            document.getElementById("fourthArticle").style.fontSize = "25px";
+            document.getElementById("fourthArticle").style.marginLeft = "231px";
+            document.getElementById("fifthArticle").style.fontSize = "25px";
+        }
+    </script>
+</body>
+
+</html>
