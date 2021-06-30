@@ -1,3 +1,3 @@
-# BBC News Coding Test Dataset
+# BBC Coding Test
 
-This repo provides the dataset for the BBC News coding test.
+
